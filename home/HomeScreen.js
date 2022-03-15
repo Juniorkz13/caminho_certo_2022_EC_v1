@@ -37,8 +37,8 @@ const styles = StyleSheet.create({
 
     buttonContainer: {
         flex: 1,
-        justifyContent: 'space-around',
+        justifyContent: 'space-evenly',
         padding: 20,
-        backgroundColor: 'rgb(40, 44, 52)'
+        backgroundColor: 'white'
     }
 })

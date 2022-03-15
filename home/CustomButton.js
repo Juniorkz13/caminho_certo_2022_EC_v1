@@ -6,7 +6,7 @@ export default ({ title = '', color = '#24CBAF', onPress }) => (
         style={[styles.button, { backgroundColor: color }]}
         onPress={onPress}
     >
-        <Text style={styles.buttonText}>{title}</Text>
+        <Text style={styles.buttonText}>{title.toUpperCase()}</Text>
     </TouchableOpacity>
 )
 
