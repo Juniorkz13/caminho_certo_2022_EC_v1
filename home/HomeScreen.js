@@ -1,29 +1,28 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import Constants from 'expo-constants'
+import { StatusBar } from 'expo-status-bar'
+
 import Header from './Header'
 import CustomButton from './CustomButton'
 
-export default () => {
+export default ({ navigation, route }) => {
+    const onClick = () => {
+        alert('clicou')
+    }
+
     const sos = () => {
-        alert('Clicou no SOS')
-    }
-
-    const registro = () => {
-        alert('Clicou no registro')
-    }
-
-    const rastreio = () => {
-        alert('Clicou no rastreio')
+        navigation.navigate('ListaContatos')
     }
 
     return (
         <View style={styles.container}>
+            <StatusBar backgroundColor="#24CBAF" style="light" />
             <Header />
             <View style={styles.buttonContainer}>
                 <CustomButton title="SOS" color="red" onPress={sos} />
-                <CustomButton title="Registro" onPress={registro} />
-                <CustomButton title="Rastreio" onPress={rastreio} />
+                <CustomButton title="Registro" onPress={onClick} />
+                <CustomButton title="Rastreio" onPress={onClick} />
             </View>
         </View>
     )

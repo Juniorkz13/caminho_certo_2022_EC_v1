@@ -1,6 +1,12 @@
 import React from 'react'
-import { View, Text, StyleSheet, FlatList, Image } from 'react-native'
-import Constants from 'expo-constants'
+import {
+    View,
+    Text,
+    StyleSheet,
+    FlatList,
+    Image,
+    TouchableOpacity
+} from 'react-native'
 import foto from '../assets/filha.png'
 
 const lista = [
@@ -24,15 +30,20 @@ const lista = [
     }
 ]
 
-export default () => {
+export default ({ navigation }) => {
     const itemLista = ({ item }) => (
-        <Text>{item.nome + ' ' + item.telefone}</Text>
+        <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() => navigation.navigate('SOS', { ...item })}
+        >
+            <Text style={styles.contato}>{item.nome}</Text>
+        </TouchableOpacity>
     )
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Lista de Contatos</Text>
             <FlatList
+                style={styles.lista}
                 data={lista}
                 renderItem={itemLista}
                 keyExtractor={(item) => String(item.id)}
@@ -42,7 +53,34 @@ export default () => {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        marginTop: Constants.statusBarHeight
+    container: {},
+
+    lista: {
+        width: '100%',
+        padding: 20
+    },
+
+    contato: {
+        backgroundColor: 'white',
+        textAlign: 'center',
+        alignContent: 'center',
+        alignItems: 'center',
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#24CBAF',
+        marginBottom: 10,
+        marginTop: 10,
+        padding: 10,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: '#24CBAF',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5
     }
 })
