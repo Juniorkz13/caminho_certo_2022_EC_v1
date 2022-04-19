@@ -1,12 +1,5 @@
 import React from 'react'
-import {
-    View,
-    Text,
-    StyleSheet,
-    FlatList,
-    Image,
-    TouchableOpacity
-} from 'react-native'
+import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
 
 import foto from '../assets/filha.png'
 import CardContato from './CardContato'

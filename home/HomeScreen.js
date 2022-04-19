@@ -6,13 +6,17 @@ import { StatusBar } from 'expo-status-bar'
 import Header from './Header'
 import CustomButton from './CustomButton'
 
-export default ({ navigation, route }) => {
+export default ({ navigation }) => {
     const onClick = () => {
         alert('clicou')
     }
 
     const sos = () => {
         navigation.navigate('ListaContatos')
+    }
+
+    const rastreio = () => {
+        navigation.navigate('Rastreio')
     }
 
     return (
@@ -22,7 +26,7 @@ export default ({ navigation, route }) => {
             <View style={styles.buttonContainer}>
                 <CustomButton title="SOS" color="red" onPress={sos} />
                 <CustomButton title="Registro" onPress={onClick} />
-                <CustomButton title="Rastreio" onPress={onClick} />
+                <CustomButton title="Rastreio" onPress={rastreio} />
             </View>
         </View>
     )

@@ -1,5 +1,5 @@
 import react from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import { View, Text, StyleSheet, Image } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 
 export default ({ foto, tipo, nome, telefone }) => (

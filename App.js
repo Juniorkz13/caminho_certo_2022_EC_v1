@@ -5,6 +5,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import HomeScreen from './home/HomeScreen'
 import ListaContatosScreen from './listaContatos/ListaContatosScreen'
 import SosScreen from './sos/SosScreen'
+import RastreioScreen from './rastreio/RastreioScreen'
+import DicasScreen from './dicas/DicasScreen'
 
 const Stack = createNativeStackNavigator()
 
@@ -12,13 +14,8 @@ export default () => {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                screenOptions={{
-                    headerStyle: {
-                        backgroundColor: '#24CBAF'
-                    },
-                    headerTintColor: 'white'
-                }}
-                initialRouteName="Home"
+                screenOptions={headerStyle}
+                initialRouteName="Dicas"
             >
                 <Stack.Screen
                     name="Home"
@@ -33,7 +30,20 @@ export default () => {
                     }}
                 />
                 <Stack.Screen name="SOS" component={SosScreen} />
+                <Stack.Screen name="Rastreio" component={RastreioScreen} />
+                <Stack.Screen
+                    name="Dicas"
+                    component={DicasScreen}
+                    options={{ title: 'Dicas' }}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     )
+}
+
+const headerStyle = {
+    headerStyle: {
+        backgroundColor: '#24CBAF'
+    },
+    headerTintColor: 'white'
 }
