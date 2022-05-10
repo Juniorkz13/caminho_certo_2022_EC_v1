@@ -6,8 +6,7 @@ import CardRastreio from './CardRastreio'
 const rastreio = [
     {
         id: 1,
-        conteudo:
-            'O rastreio é composto de várias perguntas sobre diferentes fatores de risco.',
+        conteudo: 'O rastreio é composto de várias perguntas sobre diferentes fatores de risco.',
         color: '#fff'
     },
     {
@@ -18,7 +17,7 @@ const rastreio = [
     }
 ]
 
-export default () => {
+export default ({ navigation }) => {
     const itemLista = ({ item }) => <CardRastreio {...item} />
 
     return (
@@ -31,7 +30,7 @@ export default () => {
                 />
             </View>
             <View>
-                <CustomButton title="continuar" />
+                <CustomButton title='continuar' onPress={() => navigation.navigate('Dicas')} />
             </View>
         </View>
     )
