@@ -20,7 +20,8 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "br.com.josejunior.caminhocerto2022"
     },
     "web": {
       "favicon": "./assets/favicon.png"
