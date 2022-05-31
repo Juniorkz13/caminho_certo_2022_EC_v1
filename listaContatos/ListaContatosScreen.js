@@ -5,6 +5,7 @@ import { Button, Paragraph, Dialog, Provider, Portal, TextInput } from 'react-na
 import foto from '../assets/filha.png'
 import CardContato from './CardContato'
 import * as ContatoRepository from './ContatoRepository'
+import Foto from './Foto'
 
 export default ({ navigation }) => {
     const [lista, setListaContatos] = useState([])
@@ -69,6 +70,7 @@ export default ({ navigation }) => {
                 <Dialog visible={visible} onDismiss={() => setVisible(false)}>
                     <Dialog.Title style={styles.titulo}>Informe o novo contato</Dialog.Title>
                     <Dialog.Content>
+                        <Foto />
                         <TextInput
                             mode='outlined'
                             label='Tipo'
