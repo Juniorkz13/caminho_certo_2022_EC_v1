@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native'
 import { Button, Paragraph, Dialog, Provider, Portal, TextInput } from 'react-native-paper'
 
-import foto from '../assets/filha.png'
 import CardContato from './CardContato'
 import * as ContatoRepository from './ContatoRepository'
 import Foto from './Foto'
@@ -13,6 +12,7 @@ export default ({ navigation }) => {
     const [tipo, setTipo] = useState('')
     const [nome, setNome] = useState('')
     const [telefone, setTelefone] = useState('')
+    const [fotoBase64, setFotoBase64] = useState(null)
 
     useEffect(() => {
         carregarContatos()
@@ -25,11 +25,12 @@ export default ({ navigation }) => {
 
     const addContato = async () => {
         try {
-            await ContatoRepository.adicionar(tipo, nome, telefone, foto)
+            await ContatoRepository.adicionar(tipo, nome, telefone, fotoBase64)
             setVisible(false)
             setTipo('')
             setNome('')
             setTelefone('')
+            setFotoBase64(null)
             const contatos = await ContatoRepository.buscarTodos()
             setListaContatos(contatos)
         } catch (error) {
@@ -53,6 +54,14 @@ export default ({ navigation }) => {
         </TouchableOpacity>
     )
 
+    const cancelar = () => {
+        setVisible(false)
+        setTipo('')
+        setNome('')
+        setTelefone('')
+        setFotoBase64(null)
+    }
+
     return (
         <Provider>
             <View>
@@ -70,7 +79,13 @@ export default ({ navigation }) => {
                 <Dialog visible={visible} onDismiss={() => setVisible(false)}>
                     <Dialog.Title style={styles.titulo}>Informe o novo contato</Dialog.Title>
                     <Dialog.Content>
-                        <Foto />
+                        <View style={styles.foto}>
+                            {fotoBase64 === null ? (
+                                <Foto setFotoBase64={setFotoBase64} />
+                            ) : (
+                                <Image source={{ uri: fotoBase64 }} style={styles.foto} />
+                            )}
+                        </View>
                         <TextInput
                             mode='outlined'
                             label='Tipo'
@@ -101,7 +116,7 @@ export default ({ navigation }) => {
                         />
                     </Dialog.Content>
                     <Dialog.Actions>
-                        <Button icon='cancel' color='#24CBAF' onPress={() => setVisible(false)}>
+                        <Button icon='cancel' color='#24CBAF' onPress={cancelar}>
                             Cancelar
                         </Button>
                         <Button icon='check' color='#24CBAF' onPress={addContato}>

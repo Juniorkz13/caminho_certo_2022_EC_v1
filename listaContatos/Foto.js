@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { Camera, CameraType } from 'expo-camera'
 import { Ionicons } from '@expo/vector-icons'
 
-export default () => {
+export default ({ setFotoBase64 }) => {
     const [possuiPermissao, setPossuiPermissao] = useState(null)
     const [type, setType] = useState(CameraType.front)
+    const camera = useRef()
 
     useEffect(() => {
         obterPermissaoCamera()
@@ -21,9 +22,21 @@ export default () => {
     if (possuiPermissao === false)
         return <Text>É necessário a permissão para acessar a camera</Text>
 
+    async function tirarFoto() {
+        const cameraPictureOptions = {
+            quality: 0.1,
+            base64: true
+        }
+        const data = await camera.current.takePictureAsync(cameraPictureOptions)
+        setFotoBase64('data:image/jpg;base64,' + data.base64)
+    }
+
     return (
-        <Camera style={styles.camera} type={type}>
+        <Camera ref={camera} style={styles.camera} type={type}>
             <View style={styles.container}>
+                <TouchableOpacity style={styles.disparo} onPress={tirarFoto}>
+                    <Ionicons name='md-camera' size={24} color='white' />
+                </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.botao}
                     onPress={() => {
@@ -47,17 +60,30 @@ const styles = StyleSheet.create({
     },
 
     container: {
-        flex: 1,
-        backgroundColor: 'transparent',
         flexDirection: 'row',
-        justifyContent: 'flex-end',
-        alignItems: 'center'
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        backgroundColor: 'transparent',
+        borderRadius: 100,
+        padding: 10,
+        elevation: 2,
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0
+    },
+
+    disparo: {
+        backgroundColor: '#000',
+        borderRadius: 100,
+        padding: 10,
+        elevation: 2
     },
 
     botao: {
-        backgroundColor: 'transparent',
-        margin: 20,
-        alignSelf: 'flex-end',
-        alignItems: 'center'
+        backgroundColor: '#000',
+        borderRadius: 100,
+        padding: 10,
+        elevation: 2
     }
 })

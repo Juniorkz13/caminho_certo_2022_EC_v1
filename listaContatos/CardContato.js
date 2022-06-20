@@ -1,10 +1,10 @@
-import react from 'react'
+import React from 'react'
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 
 export default ({ foto, tipo, nome, telefone, onDelete }) => (
     <View style={styles.card}>
-        <Image source={foto} style={styles.imagem} />
+        <Image source={{ uri: foto }} style={styles.imagem} />
         <View style={styles.cardBody}>
             <Text>{nome}</Text>
             <Text>{tipo}</Text>
